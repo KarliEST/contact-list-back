@@ -26,10 +26,36 @@ Services are located in [services](src/main/java/com/contacts/contactsback/sevic
 
 # Getting Started
 
+### Setup with database
+
 Before you start the app you have to set up your database. 
 1. Create PostgreSQL database named **contacts**.
 2. Default database user/password are "postgres"/"password". If necessary, they can be changed in [application.properties](src/main/resources/application.properties).
-3. Run SQL scripts from [contacts.sql](db/contacts.sql) in database, to create table and fill it with some contact data.
+3. Run SQL scripts from [database.sql](database/database.sql) in database, to create table and fill it with some contact data.
 4. Run [ContactsBackApplication](src/main/java/com/contacts/contactsback/ContactsBackApplication.java)
+   <br/>
 
+### Setup with dockerized database
+**Docker must be running!** \
+PostgreSQL database is used in docker containers and if needed Adminer as database manager. \
+Data is stored on localhost!
+1. Change database's properties in [application.properties](src/main/resources/application.properties). \
+* Comment out ln 3 (contains port nr 5432)
+* Uncomment ln 6 (contains port nr 32768)
+
+2. To run database containers, open terminal in project folder and run: \
+   **docker-compose -f postgres.yaml up -d**
+
+3. Run [ContactsBackApplication](src/main/java/com/contacts/contactsback/ContactsBackApplication.java)
+4. To stop and containers, networks, volumes, and images created by **up**, type into terminal: \
+   **docker-compose -f postgres.yaml down**
+
+To use Adminer open [postgres.yaml](postgres.yaml) and uncomment lines 20-24. \
+By default Adminer uses port 8081 (http://localhost:8081/). Port nr can be changed on ln 24. \
+To login (defined in [postgres.yaml](postgres.yaml)) :
+* System: PostgreSQL
+* Server: contacts-db
+* Username: postgres
+* Password: password
+* Database: contacts
 ### NB! Front end is configured to use proxy port: 8080
