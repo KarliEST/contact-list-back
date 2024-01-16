@@ -18,7 +18,7 @@ public class ContactRequest {
 	private String codename;
 	@NotBlank(message = "phone number must not be empty")
 	@Pattern(regexp = "^\\+(?:\\d\\s?){6,14}\\d$",
-			message = "phone number must be in format: +CCC NNNNNNNNN(+372 987654321)")
+			message = "phone number must include country code: +CCC NNNNNNNNN(+372 987654321)")
 	private String phoneNumber;
 
 }
