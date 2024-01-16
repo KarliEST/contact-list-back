@@ -1,4 +1,9 @@
-create table contacts
+create schema if not exists public;
+
+create sequence if not exists public.contacts_id_seq
+    as integer;
+
+create table if not exists contacts
 (
     id           integer generated always as identity,
     first_name   varchar not null,
